@@ -38,7 +38,7 @@ function star(){
         if(this.z < 1){
             this.z = $(window).width()/2;
         }
-        this.z -=1.5;
+        this.z -=4;
     }
 
 
