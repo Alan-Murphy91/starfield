@@ -1,45 +1,40 @@
-var stars = new Array(2500);
+const stars = new Array(1000);
 
 function setup(){
-    createCanvas($(window).width(), $(window).height(), )
-    for(var i=0; i<2500; i++){
+    createCanvas(window.screen.availWidth, window.screen.availHeight)
+    for(var i=0; i<1000; i++){
         stars[i] = new star();
     }
 }
 
 function draw(){
     background(0);
-    translate($(window).width()/2, $(window).height()/2);
-    for(var i=0; i<2500; i++){
-        stars[i].show();
+    translate(window.screen.availWidth/2, window.screen.availHeight/2);
+    for(var i=0; i<1000; i++){
+		stars[i].show();
+		// console.log(stars[i].x, stars[i].y, stars[i].z);
     }
 }
 
 function star(){
-    this.x = (Math.random() * $(window).width()) + 1;
-    this.y = (Math.random() * $(window).height()) + 1;
-    this.z = (Math.random() * $(window).height()) + 1;
+    this.x = (Math.random() * window.screen.availWidth) + 1;
+    this.y = (Math.random() * window.screen.availHeight) + 1;
+    this.z = (Math.random() * window.screen.availHeight) + 1;
 
-    var coin = Math.random() < 0.5 ? -1 : 1;
-    var coin2 = Math.random() < 0.5 ? -1 : 1;
-    
-    this.x *= coin;
-    this.y *= coin2;
-
-    
+    this.x *= Math.random() < 0.5 ? -1 : 1;
+    this.y *= Math.random() < 0.5 ? -1 : 1;
 
     this.show = function(){
         fill(255);
         noStroke();
-        var nx = map(this.x/this.z,0,1,0,$(window).width()/2);
-        var ny = map(this.y/this.z,0,1,0,$(window).height()/2);
-        var size = map(this.z, $(window).width()/2, 1, 0.1,8);
-        ellipse(nx,ny,size,size);
-        if(this.z < 1){
-            this.z = $(window).width()/2;
-        }
+        var nx = map(this.x/this.z,0,1,0,window.screen.availWidth/3);
+        var ny = map(this.y/this.z,0,1,0,window.screen.availHeight/3);
+        var size = map(this.z, window.screen.availWidth/2, 1, 0.1,8);
+		ellipse(nx,ny,size,size);
+		// console.log(nx, ny);
+		if(nx > window.screen.availWidth || ny > window.screen.availHeight) {
+			this.z = window.screen.availWidth/2;
+		}
         this.z -=1.5;
     }
-
-
 }
